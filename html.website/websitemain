@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Blox Fruit Grind helps Roblox players with Blox Fruits leveling, rare items, mastery, and V4 services.">
+	<title>Blox Fruit Grind | Your grind, handled.</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+		:root {
+			--ink: #10231f;
+			--muted: #5e716c;
+			--paper: #f4f1e8;
+			--cream: #fffdf6;
+			--lime: #c9f46a;
+			--coral: #ff765f;
+			--line: #d9dfd4;
+			--shadow: 0 18px 50px rgba(16, 35, 31, .10);
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; color: var(--ink); background: var(--paper); font-family: 'Space Grotesk', sans-serif; }
+		a { color: inherit; }
+		.container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+		.eyebrow { color: #63766d; font: 500 12px 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+		.button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 18px; border: 1px solid var(--ink); border-radius: 4px; background: var(--ink); color: white; text-decoration: none; font-weight: 700; transition: transform .2s, box-shadow .2s; }
+		.button:hover { transform: translateY(-3px); box-shadow: 5px 5px 0 var(--coral); }
+		.button.light { background: var(--cream); color: var(--ink); }
+		.button.lime { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+		header { padding: 22px 0; }
+		nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+		.brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; font-size: 16px; font-weight: 700; }
+		.brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid var(--ink); background: var(--lime); transform: rotate(-6deg); font: 700 14px 'DM Mono', monospace; }
+		.nav-links { display: flex; gap: 24px; color: var(--muted); font-size: 14px; font-weight: 600; }
+		.nav-links a { text-decoration: none; }
+		.nav-links a:hover { color: var(--ink); }
+
+		.hero { position: relative; overflow: hidden; padding: 78px 0 95px; background: var(--cream); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+		.hero:after { position: absolute; right: -100px; bottom: -170px; width: 450px; height: 450px; border: 1px solid #d8e0d3; border-radius: 50%; box-shadow: 0 0 0 36px #f8f6ee, 0 0 0 37px #d8e0d3, 0 0 0 72px #f8f6ee, 0 0 0 73px #d8e0d3; content: ''; opacity: .8; }
+		.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: 80px; align-items: center; }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { max-width: 720px; margin-bottom: 24px; font-size: clamp(48px, 8vw, 92px); line-height: .92; letter-spacing: -.06em; }
+		h1 em { color: var(--coral); font-style: normal; }
+		.hero-copy { max-width: 520px; margin-bottom: 30px; color: var(--muted); font-size: 18px; line-height: 1.6; }
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+		.hero-note { display: flex; gap: 10px; align-items: center; margin-top: 24px; color: var(--muted); font: 12px 'DM Mono', monospace; }
+		.hero-note strong { color: var(--ink); }
+		.hero-card { position: relative; padding: 28px; border: 1px solid var(--ink); background: var(--ink); color: white; box-shadow: 12px 12px 0 var(--coral); }
+		.hero-card:before { position: absolute; top: 16px; right: 17px; width: 9px; height: 9px; border-radius: 50%; background: var(--lime); content: ''; }
+		.hero-card h2 { margin: 35px 0 25px; font-size: 28px; line-height: 1; }
+		.price-line { display: flex; align-items: baseline; justify-content: space-between; padding: 16px 0; border-top: 1px solid #394945; }
+		.price-line:last-of-type { border-bottom: 1px solid #394945; }
+		.price-line span { color: #b9c6c0; font-size: 14px; }
+		.price-line strong { color: var(--lime); font: 700 22px 'DM Mono', monospace; }
+		.hero-card .button { width: 100%; margin-top: 24px; }
+
+		section { padding: 92px 0; }
+		.section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 38px; }
+		h2 { margin-bottom: 0; font-size: clamp(34px, 5vw, 58px); line-height: .98; letter-spacing: -.05em; }
+		.section-intro { max-width: 400px; margin-bottom: 0; color: var(--muted); line-height: 1.5; }
+		.services { background: #dfe9da; }
+		.service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+		.service { display: flex; min-height: 220px; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--ink); background: var(--cream); }
+		.service.featured { background: var(--coral); }
+		.service h3 { margin: 25px 0 8px; font-size: 23px; }
+		.service p { margin-bottom: 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
+		.featured p { color: #54271f; }
+		.service-top { display: flex; align-items: center; justify-content: space-between; }
+		.tag { color: var(--muted); font: 11px 'DM Mono', monospace; text-transform: uppercase; }
+		.service-price { font: 700 22px 'DM Mono', monospace; }
+
+		.quote-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: start; }
+		.quote-form { padding: 30px; border: 1px solid var(--ink); background: var(--cream); box-shadow: var(--shadow); }
+		label { display: block; margin-bottom: 8px; font: 12px 'DM Mono', monospace; text-transform: uppercase; }
+		input[type='number'] { width: 100%; padding: 15px; border: 1px solid var(--line); border-radius: 2px; background: white; color: var(--ink); font: 18px 'DM Mono', monospace; }
+		.quote-result { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
+		.quote-result strong { color: var(--coral); font: 700 30px 'DM Mono', monospace; }
+		.fine-print { margin: 18px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+		.check-list { display: grid; gap: 17px; margin: 28px 0 0; padding: 0; list-style: none; }
+		.check-list li { display: flex; gap: 13px; align-items: start; line-height: 1.45; }
+		.check-list li:before { flex: 0 0 auto; width: 21px; height: 21px; background: var(--lime); content: '✓'; text-align: center; font-weight: 700; }
+
+		.contact { padding: 75px 0; background: var(--ink); color: white; }
+		.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: end; }
+		.contact h2 { max-width: 530px; color: var(--lime); }
+		.contact p { max-width: 430px; color: #b9c6c0; line-height: 1.6; }
+		.contact-actions { display: grid; gap: 10px; }
+		.contact .button { justify-content: space-between; border-color: #52645e; background: transparent; }
+		.contact .button:hover { background: var(--coral); border-color: var(--coral); box-shadow: none; }
+		.contact .button span { color: var(--lime); font: 12px 'DM Mono', monospace; }
+		footer { padding: 24px 0; background: #0b1a17; color: #83938d; font: 11px 'DM Mono', monospace; }
+		footer .container { display: flex; justify-content: space-between; gap: 20px; }
+
+		@media (max-width: 760px) {
+			.container { width: min(100% - 28px, 560px); }
+			.nav-links { display: none; }
+			.hero { padding: 58px 0 75px; }
+			.hero-grid, .quote-grid, .contact-grid { grid-template-columns: 1fr; gap: 42px; }
+			.hero-card { max-width: 500px; }
+			section { padding: 65px 0; }
+			.section-head { display: block; }
+			.section-intro { margin-top: 18px; }
+			.service-grid { grid-template-columns: 1fr; }
+			.service { min-height: 180px; }
+			footer .container { display: block; }
+			footer span { display: block; margin-top: 8px; }
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<nav class="container" aria-label="Main navigation">
+			<a class="brand" href="#top"><span class="brand-mark">BF</span> Blox Fruit Grind</a>
+			<div class="nav-links">
+				<a href="#services">Services</a>
+				<a href="#quote">Quick quote</a>
+				<a href="#contact">Contact</a>
+				<a href="https://discord.gg/rnrRfNpsU" target="_blank" rel="noreferrer">Discord</a>
+			</div>
+			<a class="button light" href="#contact">Book a grind</a>
+		</nav>
+	</header>
+
+	<main id="top">
+		<section class="hero">
+			<div class="container hero-grid">
+				<div>
+					<p class="eyebrow">Blox Fruits grinding service / 01</p>
+					<h1>Your grind,<br><em>handled.</em></h1>
+					<p class="hero-copy">Leveling, rare drops, mastery, weapons, and V4 progression for players who would rather spend their time playing.</p>
+					<div class="hero-actions">
+						<a class="button" href="#services">See the menu <span aria-hidden="true">↓</span></a>
+						<a class="button light" href="#contact">Message to start</a>
+					</div>
+					<p class="hero-note"><strong>Starting at $0.50</strong> / 100 levels</p>
+				</div>
+				<aside class="hero-card" aria-label="Popular services">
+					<p class="eyebrow" style="color:#b9c6c0">Fast menu / popular picks</p>
+					<h2>Endgame goals.<br>Less waiting.</h2>
+					<div class="price-line"><span>Cursed Dual Katana</span><strong>$12</strong></div>
+					<div class="price-line"><span>Shark Anchor</span><strong>$12</strong></div>
+					<div class="price-line"><span>V4 unlock</span><strong>$15</strong></div>
+					<a class="button lime" href="#contact">Get a custom quote <span aria-hidden="true">↗</span></a>
+				</aside>
+			</div>
+		</section>
+
+		<section class="services" id="services">
+			<div class="container">
+				<div class="section-head">
+					<div><p class="eyebrow">What we grind / 02</p><h2>Pick a goal.<br>We do the work.</h2></div>
+					<p class="section-intro">Starting prices assume the account already meets the required level and sea. Need multiple goals? Ask for a bundle quote. More games are coming soon.</p>
+				</div>
+				<div class="service-grid">
+					<article class="service"><div class="service-top"><span class="tag">Weapon / mythical</span><span class="service-price">$12</span></div><div><h3>Cursed Dual Katana</h3><p>Yama and Tushita at 350 mastery, plus the CDK puzzle.</p></div></article>
+					<article class="service featured"><div class="service-top"><span class="tag">Weapon / legendary</span><span class="service-price">$12</span></div><div><h3>Shark Anchor</h3><p>Monster Magnet requirements, summon, and Anchored Terrorshark kill.</p></div></article>
+					<article class="service"><div class="service-top"><span class="tag">Race / progression</span><span class="service-price">$15</span></div><div><h3>V4 unlock</h3><p>Race V4 puzzle and the first successful trial.</p></div></article>
+					<article class="service"><div class="service-top"><span class="tag">Fighting style</span><span class="service-price">$20</span></div><div><h3>Godhuman</h3><p>Required styles at 400 mastery, plus purchase requirements.</p></div></article>
+					<article class="service"><div class="service-top"><span class="tag">Rare drop / 5%</span><span class="service-price">$10</span></div><div><h3>Hallow Scythe</h3><p>Soul Reaper farming until the drop.</p></div></article>
+					<article class="service"><div class="service-top"><span class="tag">Race / full training</span><span class="service-price">$35</span></div><div><h3>Full V4 training</h3><p>Four successful trials and full training for one race.</p></div></article>
+				</div>
+			</div>
+		</section>
+
+		<section id="quote">
+			<div class="container quote-grid">
+				<div><p class="eyebrow">Level calculator / 03</p><h2>Simple math.<br>No surprises.</h2><ul class="check-list"><li>Every 100 levels costs $0.50.</li><li>Leveling is separate from item, puzzle, mastery, and drop fees.</li><li>Custom or difficult requests get a price before work begins.</li></ul></div>
+				<form class="quote-form" onsubmit="return false">
+					<label for="levels">How many levels?</label>
+					<input id="levels" type="number" min="0" step="1" value="500" aria-describedby="quote-note">
+					<div class="quote-result"><span>Estimated leveling price</span><strong id="total">$2.50</strong></div>
+					<p class="fine-print" id="quote-note">Rounded up to the next 100 levels. This estimate covers normal XP grinding only.</p>
+				</form>
+			</div>
+		</section>
+
+		<section class="contact" id="contact">
+			<div class="container contact-grid">
+				<div><p class="eyebrow" style="color:#b9c6c0">Ready when you are / 04</p><h2>Tell us the goal.<br>We’ll quote the rest.</h2><p>Send your current level, target, and the item or service you want. We’ll confirm the scope and price before starting.</p></div>
+				<div class="contact-actions">
+					<a class="button" href="https://www.roblox.com/users/profile?username=adadadda143" target="_blank" rel="noreferrer">Message on Roblox <span>adadadda143 ↗</span></a>
+					<a class="button" href="https://discord.gg/rnrRfNpsU" target="_blank" rel="noreferrer">Message on Discord <span>red_nemsis ↗</span></a>
+					<a class="button" href="https://discord.gg/rnrRfNpsU" target="_blank" rel="noreferrer">Join the Discord server <span>Discord server ↗</span></a>
+					<a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdO1iEw_9FUiDq9Aq4bza6UHsJdwlH1Bnz-O4ycQUe75dxwxg/viewform?usp=header" target="_blank" rel="noreferrer">Apply to join staff <span>Staff form ↗</span></a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer><div class="container"><span>© 2026 Blox Fruit Grind</span><span>Prices are starting estimates and may change with game updates.</span></div></footer>
+
+	<script>
+		const levels = document.querySelector('#levels');
+		const total = document.querySelector('#total');
+		levels.addEventListener('input', () => {
+			const amount = Math.max(0, Number(levels.value) || 0);
+			const price = Math.ceil(amount / 100) * 0.5;
+			total.textContent = `$${price.toFixed(2)}`;
+		});
+	</script>
+</body>
+</html>
